@@ -42,8 +42,8 @@ $payload = (
 ) -join $LF
 
 #Read the data file and transplant it as part of a UTF-8 based payload
-$fileBytes = [System.IO.File]::ReadAllBytes($data_path);
-$fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
+$fileBytes1 = [System.IO.File]::ReadAllBytes($data_path);
+$fileEnc1 = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes1);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
 $contentType = "multipart/form-data; boundary=`"$boundary`""
@@ -51,7 +51,7 @@ $payload = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: application/octet-stream$LF",
-    $fileEnc,
+    $fileEnc1,
     "--$boundary--$LF"
 ) -join $LF
 
