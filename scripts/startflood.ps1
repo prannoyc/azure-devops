@@ -44,15 +44,15 @@ $payload = (
 #Read the data file and transplant it as part of a UTF-8 based payload
 $fileBytes1 = [System.IO.File]::ReadAllBytes($data_path);
 $fileEnc1 = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes1);
-$boundary = [System.Guid]::NewGuid().ToString();
+$boundary1 = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
-$contentType = "multipart/form-data; boundary=`"$boundary`""
+$contentType = "multipart/form-data; boundary1=`"$boundary1`""
 $payload = (
-    "--$boundary",
+    "--$boundary1",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: application/octet-stream$LF",
     $fileEnc1,
-    "--$boundary--$LF"
+    "--$boundary1--$LF"
 ) -join $LF
 
 #Submit the POST request to the Flood API and capture the returned Flood UUID
