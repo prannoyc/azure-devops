@@ -11,7 +11,7 @@
 #Declare some variables and input parameters
 $access_token = $env:MY_FLOOD_TOKEN
 $api_url = "https://api.flood.io"
-$data_path ='data/MCI.csv'
+$data_path ='scripts/jmeter/MCI.csv'
 $script_path = 'scripts/jmeter/002_MCI.jmx'
 $flood_project = 'azure-devops'
 $flood_name = 'myAzureTest'
