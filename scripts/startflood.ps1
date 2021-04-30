@@ -34,7 +34,7 @@ $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
 $contentType = "multipart/form-data; boundary=`"$boundary`""
-$payload1 = (
+$payload = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: application/octet-stream$LF",
@@ -49,7 +49,7 @@ $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
 $contentType = "multipart/form-data; boundary=`"$boundary`""
-$payload = (
+$payload1 = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"002_MCI.jmx`"",
     "Content-Type: application/octet-stream$LF",
