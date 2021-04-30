@@ -42,18 +42,18 @@ $payload = (
 ) -join $LF
 
 #Read the data file and transplant it as part of a UTF-8 based payload
-$fileBytes = [System.IO.File]::ReadAllBytes($data_path);
-$fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
+$fileBytes1 = [System.IO.File]::ReadAllBytes($data_path);
+$fileEnc1 = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes1);
 $boundary1 = [System.Guid]::NewGuid().ToString();
-$LF = "`r`n";
+$LF1 = "`r`n";
 $contentType1 = "multipart/form-data; boundary=`"$boundary1`""
 $payload1 = (
     "--$boundary1",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: application/octet-stream$LF",
-    $fileEnc,
-    "--$boundary1--$LF"
-) -join $LF
+    "Content-Type: text/csv$LF1",
+    $fileEnc1,
+    "--$boundary1--$LF1"
+) -join $LF1
 
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
