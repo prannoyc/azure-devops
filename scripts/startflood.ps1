@@ -62,7 +62,7 @@ $payload = (
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
-    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1 $payload
+    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
 
     $outFloodID = $responseFull.uuid
     Write-Output "Flood ID is: $outFloodID"
