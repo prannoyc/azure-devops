@@ -42,6 +42,7 @@ $payload = (
     "--$boundary--$LF"
 ) -join $LF
 
+Write-Output $fileEnc
 
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
@@ -88,6 +89,7 @@ $payload = (
     "--$boundary--$LF"
 ) -join $LF
 
+Write-Output $fileEnc
 
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
