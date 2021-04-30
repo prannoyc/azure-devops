@@ -61,7 +61,7 @@ Write-Output $fileEnc
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
     Write-Output "inside-this step1"
-    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
+    #$responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
     Write-Output $responseFull
     Write-Output "Step2"
     $responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1
