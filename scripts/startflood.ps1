@@ -94,7 +94,9 @@ Write-Output $fileEnc
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
+    Write-Output "inside-this step1"
     $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
+    Write-Output $responseFull
     $outFloodID = $responseFull.uuid
     Write-Output "Flood ID is: $outFloodID"
     Write-Output "##vso[task.setvariable variable=flood_uuid;]$outFloodID"
