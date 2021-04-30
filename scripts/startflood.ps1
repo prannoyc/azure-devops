@@ -12,7 +12,6 @@
 $access_token = $env:MY_FLOOD_TOKEN
 $api_url = "https://api.flood.io"
 $script_path = 'scripts/jmeter/002_MCI.jmx'
-$data_path = 'data/MCI.csv'
 $flood_project = 'azure-devops'
 $flood_name = 'myAzureTest'
 
@@ -41,19 +40,6 @@ $payload = (
     "--$boundary--$LF"
 ) -join $LF
 
-#Read the data file and transplant it as part of a UTF-8 based payload
-$fileBytes1 = [System.IO.File]::ReadAllBytes($data_path);
-$fileEnc1 = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes1);
-$boundary1 = [System.Guid]::NewGuid().ToString();
-$LF = "`r`n";
-$contentType = "multipart/form-data; boundary1=`"$boundary1`""
-$payload = (
-    "--$boundary1",
-    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: application/octet-stream$LF",
-    $fileEnc1,
-    "--$boundary1--$LF"
-) -join $LF
 
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
