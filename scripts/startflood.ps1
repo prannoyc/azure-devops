@@ -34,7 +34,7 @@ $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
 $contentType = "multipart/form-data; boundary=`"$boundary`""
-$payload = (
+$payload1 = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: application/octet-stream$LF",
@@ -49,7 +49,7 @@ $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
 $contentType = "multipart/form-data; boundary=`"$boundary`""
-$payload1 = (
+$payload = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"002_MCI.jmx`"",
     "Content-Type: application/octet-stream$LF",
@@ -61,10 +61,10 @@ Write-Output $fileEnc
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
     Write-Output "inside-this step1"
-    #$responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
+    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
     Write-Output $responseFull
     Write-Output "Step2"
-    $responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1
+    #$responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1
     Write-Output $responseFull1
     $outFloodID = $responseFull.uuid
     Write-Output "Flood ID is: $outFloodID"
