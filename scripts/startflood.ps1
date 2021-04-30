@@ -11,7 +11,7 @@
 #Declare some variables and input parameters
 $access_token = $env:MY_FLOOD_TOKEN
 $api_url = "https://api.flood.io"
-$data_path ='scripts/jmeter/MCI.csv'
+$data_path ='scripts/jmeter/jmeter_1000rpm.jmx'
 $script_path = 'scripts/jmeter/002_MCI.jmx'
 $flood_project = 'azure-devops'
 $flood_name = 'myAzureTest'
@@ -37,7 +37,7 @@ $LF = "`r`n";
 $contentType = "multipart/form-data; boundary1=`"$boundary`""
 $payload1 = (
     "--$boundary",
-    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
+    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"jmeter_1000rpm.jmx`"",
     "Content-Type: application/octet-stream$LF",
     $fileEnc1,
     "--$boundary--$LF"
@@ -62,7 +62,7 @@ $payload = (
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
-    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
+    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload $payload1
 
     $outFloodID = $responseFull.uuid
     Write-Output "Flood ID is: $outFloodID"
