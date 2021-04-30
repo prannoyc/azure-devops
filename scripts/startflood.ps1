@@ -44,17 +44,17 @@ $payload = (
 
 Write-Output $fileEnc
 #Read the script file and transplant it as part of a UTF-8 based payload
-$fileBytes = [System.IO.File]::ReadAllBytes($script_path);
-$fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
-$boundary = [System.Guid]::NewGuid().ToString();
+$fileBytes1 = [System.IO.File]::ReadAllBytes($script_path);
+$fileEnc1 = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes1);
+$boundary1 = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
-$contentType = "multipart/form-data; boundary=`"$boundary`""
+$contentType1 = "multipart/form-data; boundary=`"$boundary1`""
 $payload1 = (
-    "--$boundary",
+    "--$boundary1",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"002_MCI.jmx`"",
     "Content-Type: application/octet-stream$LF",
-    $fileEnc,
-    "--$boundary--$LF"
+    $fileEnc1,
+    "--$boundary1--$LF"
 ) -join $LF
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
@@ -63,7 +63,7 @@ try {
     $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
     Write-Output $responseFull
     Write-Output "Step2"
-    $responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1
+    $responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType1 -Body $payload1
     Write-Output $responseFull1
     $outFloodID = $responseFull.uuid
     Write-Output "Flood ID is: $outFloodID"
