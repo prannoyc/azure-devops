@@ -20,6 +20,15 @@ $flood_name = 'myAzureTest'
 $uri = "$api_url/api/floods?flood[tool]=jmeter&flood[threads]=5&flood[duration]=120&flood[project]=$flood_project&flood[privacy]=public&flood[name]=$flood_name&flood[grids][][infrastructure]=demand&flood[grids][][instance_quantity]=1&flood[grids][][region]=us-east-1&flood[grids][][instance_type]=m5.xlarge&flood[grids][][stop_after]=10"
 
 
+
+#Encode the Flood auth token with Base64 and use it as a header for our request to Flood API
+$bytes = [System.Text.Encoding]::ASCII.GetBytes($access_token)
+$base64 = [System.Convert]::ToBase64String($bytes)
+$basicAuthValue = "Basic $base64"
+$headers = @{
+    'Authorization' = $basicAuthValue
+}
+
 #Read the data file and transplant it as part of a UTF-8 based payload
 $fileBytes = [System.IO.File]::ReadAllBytes($data_path);
 $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
@@ -34,13 +43,6 @@ $payload1 = (
     "--$boundary--$LF"
 ) -join $LF
 
-#Encode the Flood auth token with Base64 and use it as a header for our request to Flood API
-$bytes = [System.Text.Encoding]::ASCII.GetBytes($access_token)
-$base64 = [System.Convert]::ToBase64String($bytes)
-$basicAuthValue = "Basic $base64"
-$headers = @{
-    'Authorization' = $basicAuthValue
-}
 
 #Read the script file and transplant it as part of a UTF-8 based payload
 $fileBytes = [System.IO.File]::ReadAllBytes($script_path);
@@ -60,6 +62,7 @@ $payload = (
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
+    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1
     $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
 
     $outFloodID = $responseFull.uuid
