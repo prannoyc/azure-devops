@@ -43,40 +43,6 @@ $payload = (
 ) -join $LF
 
 Write-Output $fileEnc
-
-#Submit the POST request to the Flood API and capture the returned Flood UUID
-#Store the Flood UUID as a variable that can be shared with other Azure Devops steps
-try {
-    Write-Output "inside-this step1"
-    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
-    Write-Output $responseFull
-    $outFloodID = $responseFull.uuid
-    Write-Output "Flood ID is: $outFloodID"
-    Write-Output "##vso[task.setvariable variable=flood_uuid;]$outFloodID"
-    
-}
-catch {
-    $responseBody = ""
-    $errorMessage = $_.Exception.Message
-    if (Get-Member -InputObject $_.Exception -Name 'Response') {
-        write-output $_.Exception.Response
-       
-        try {
-            $result = $_.Exception.Response.GetResponseStream()
-            $reader = New-Object System.IO.StreamReader($result, [System.Text.Encoding]::ASCII)
-            $reader.BaseStream.Position = 0
-            $reader.DiscardBufferedData()
-            $responseBody = $reader.ReadToEnd();
-            Write-Output "response body: $responseBody"
-        }
-        catch {
-            Throw "An error occurred while calling REST method at: $uri. Error: $errorMessage. Cannot get more information."
-        }
-    }
-    Throw "An error occurred while calling REST method at: $uri. Error: $errorMessage. Response body: $responseBody"
-
-}
-
 #Read the script file and transplant it as part of a UTF-8 based payload
 $fileBytes = [System.IO.File]::ReadAllBytes($script_path);
 $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
@@ -90,12 +56,13 @@ $payload1 = (
     $fileEnc,
     "--$boundary--$LF"
 ) -join $LF
-
 Write-Output $fileEnc
-
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
+    Write-Output "inside-this step1"
+    $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
+    Write-Output $responseFull
     Write-Output "Step2"
     $responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload1
     Write-Output $responseFull1
