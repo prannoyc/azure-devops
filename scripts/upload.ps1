@@ -22,7 +22,7 @@ $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
 $contentType = "multipart/form-data; boundary1=`"$boundary`""
-$payload = (
+$payload1 = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: application/octet-stream$LF",
