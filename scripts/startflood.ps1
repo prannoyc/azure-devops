@@ -33,13 +33,11 @@ $fileBytes = [System.IO.File]::ReadAllBytes($data_path);
 $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
-$contentType = "multipart/form-data; boundary=`"$boundary`""
+$contentType = "text/csv"
 $payload = (
-    "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: text/csv$LF",
-    $fileEnc,
-    "--$boundary--$LF"
+    $fileEnc
 ) -join $LF
 
 Write-Output $fileEnc
@@ -48,13 +46,11 @@ $fileBytes = [System.IO.File]::ReadAllBytes($script_path);
 $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 $boundary = [System.Guid]::NewGuid().ToString();
 $LF = "`r`n";
-$contentType1 = "multipart/form-data; boundary=`"$boundary`""
+$contentType1 = "application/octet-stream"
 $payload1 = (
-    "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"002_MCI.jmx`"",
     "Content-Type: application/octet-stream$LF",
-    $fileEnc,
-    "--$boundary--$LF"
+    $fileEnc
 ) -join $LF
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
