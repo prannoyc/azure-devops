@@ -37,7 +37,7 @@ $contentType = "multipart/form-data; boundary=`"$boundary`""
 $payload = (
     "--$boundary",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: application/octet-stream$LF",
+    "Content-Type: text/csv$LF",
     $fileEnc,
     "--$boundary--$LF"
 ) -join $LF
