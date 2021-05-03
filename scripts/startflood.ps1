@@ -30,7 +30,7 @@ $headers = @{
 #Read the data file and transplant it as part of a UTF-8 based payload
 
 $file = [io.file]::ReadAllBytes($data_path)
-[io.file]::WriteAllBytes('/data/flood/files/MCI.csv',$file)
+[io.file]::WriteAllBytes('data/flood/files/MCI.csv',$file)
 
 
 #Read the script file and transplant it as part of a UTF-8 based payload
