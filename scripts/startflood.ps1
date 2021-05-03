@@ -12,9 +12,8 @@
 $access_token = $env:MY_FLOOD_TOKEN
 $api_url = "https://api.flood.io"
 $script_path = 'scripts/jmeter/002_MCI.jmx'
-$data_path = 'scripts/jmeter/MCI.csv'
 $flood_project = 'azure-devops'
-$flood_name = 'myAzureTest4'
+$flood_name = 'myAzureTest5'
 
 #Setup the API URI that contains all parameters required to start a Grid, Flood and test settings.
 $uri = "$api_url/api/floods?flood[tool]=jmeter&flood[threads]=5&flood[duration]=300&flood[project]=$flood_project&flood[privacy]=public&flood[name]=$flood_name&flood[grids][][infrastructure]=demand&flood[grids][][instance_quantity]=1&flood[grids][][region]=us-east-1&flood[grids][][instance_type]=m5.xlarge&flood[grids][][stop_after]=10"
@@ -41,26 +40,11 @@ $payload = (
     "--$boundary--$LF"
 ) -join $LF
 
-#Read the data file and transplant it as part of a UTF-8 based payload
-
-$fileBytes1 = [System.IO.File]::ReadAllBytes($data_path);
-$fileEnc1 = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes1);
-$boundary1 = [System.Guid]::NewGuid().ToString();
-$LF1 = "`r`n";
-$contentType1 = "text/csv; boundary=`"$boundary1`""
-$payload1 = (
-    "--$boundary1",
-    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: text/csv$LF1",
-    $fileEnc1,
-    "--$boundary1--$LF1"
-) -join $LF1
 
 #Submit the POST request to the Flood API and capture the returned Flood UUID
 #Store the Flood UUID as a variable that can be shared with other Azure Devops steps
 try {
     $responseFull = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType -Body $payload
-    $responseFull1 = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentType1 -Body $payload1
     $outFloodID = $responseFull.uuid
     Write-Output "Flood ID is: $outFloodID"
     Write-Output "##vso[task.setvariable variable=flood_uuid;]$outFloodID"
