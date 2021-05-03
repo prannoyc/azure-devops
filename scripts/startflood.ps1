@@ -31,14 +31,17 @@ $headers = @{
 
 $fileBytesOne = [System.IO.File]::ReadAllBytes($data_path);
 $fileEncOne = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytesOne);
-$contentTypeOne = "multipart/form-data;
+$boundaryOne = [System.Guid]::NewGuid().ToString();
+$LF = "`r`n";
+$contentType = "multipart/form-data; boundary=`"$boundaryOne`""
 $payloadOne = (
-  
-    "Content-Disposition: text/csv; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: text/csv",
+    "--$boundaryOne",
+    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
+    "Content-Type: text/csv$LF",
     $fileEncOne,
-  
-) 
+    "--$boundaryOne--$LF"
+) -join $LF
+
 Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentTypeOne -Body $payloadOne
 
 #Read the script file and transplant it as part of a UTF-8 based payload
