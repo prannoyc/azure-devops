@@ -12,6 +12,7 @@
 $access_token = $env:MY_FLOOD_TOKEN
 $api_url = "https://api.flood.io"
 $script_path = 'scripts/jmeter/002_MCI.jmx'
+$data_path = 'scripts/jmeter/MCI.csv'
 $flood_project = 'azure-devops'
 $flood_name = 'myAzureTest6'
 
@@ -25,6 +26,12 @@ $basicAuthValue = "Basic $base64"
 $headers = @{
     'Authorization' = $basicAuthValue
 }
+
+#Read the data file and transplant it as part of a UTF-8 based payload
+
+$file = [io.file]::ReadAllBytes($data_path)
+[io.file]::WriteAllBytes('/data/flood/files/MCI.csv',$file)
+
 
 #Read the script file and transplant it as part of a UTF-8 based payload
 $fileBytes = [System.IO.File]::ReadAllBytes($script_path);
