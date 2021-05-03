@@ -13,7 +13,7 @@ $access_token = $env:MY_FLOOD_TOKEN
 $api_url = "https://api.flood.io"
 $script_path = 'scripts/jmeter/002_MCI.jmx'
 $flood_project = 'azure-devops'
-$flood_name = 'myAzureTest5'
+$flood_name = 'myAzureTest6'
 
 #Setup the API URI that contains all parameters required to start a Grid, Flood and test settings.
 $uri = "$api_url/api/floods?flood[tool]=jmeter&flood[threads]=5&flood[duration]=300&flood[project]=$flood_project&flood[privacy]=public&flood[name]=$flood_name&flood[grids][][infrastructure]=demand&flood[grids][][instance_quantity]=1&flood[grids][][region]=us-east-1&flood[grids][][instance_type]=m5.xlarge&flood[grids][][stop_after]=10"
