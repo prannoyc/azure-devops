@@ -34,8 +34,8 @@ $fileEncOne = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytesO
 $contentTypeOne = "multipart/form-data;
 $payloadOne = (
   
-    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: text/csv$LF",
+    "Content-Disposition: text/csv; name=`"flood_files[]`"; filename=`"MCI.csv`"",
+    "Content-Type: text/csv",
     $fileEncOne,
   
 ) 
