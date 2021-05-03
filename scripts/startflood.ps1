@@ -30,17 +30,8 @@ $headers = @{
 #Read the data file and transplant it as part of a UTF-8 based payload
 
 $fileBytesOne = [System.IO.File]::ReadAllBytes($data_path);
-$fileEncOne = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytesOne);
-$boundaryOne = [System.Guid]::NewGuid().ToString();
-$LF = "`r`n";
-$contentType = "multipart/form-data; boundary=`"$boundaryOne`""
-$payloadOne = (
-    "--$boundaryOne",
-    "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
-    "Content-Type: text/csv$LF",
-    $fileEncOne,
-    "--$boundaryOne--$LF"
-) -join $LF
+[io.file]::WriteAllBytes('/data/flood/files/test.csv',$fileBytesOne);
+
 
 Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentTypeOne -Body $payloadOne
 
