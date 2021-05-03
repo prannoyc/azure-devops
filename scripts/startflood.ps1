@@ -31,15 +31,15 @@ $headers = @{
 
 $fileBytesOne = [System.IO.File]::ReadAllBytes($data_path);
 $fileEncOne = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytesOne);
-$boundaryOne = [System.Guid]::NewGuid().ToString();
-$LF = "`r`n";
-$contentTypeOne = "multipart/form-data; boundary=`"$boundaryOne`""
+#$boundaryOne = [System.Guid]::NewGuid().ToString();
+#$LF = "`r`n";
+$contentTypeOne = "multipart/form-data;
 $payloadOne = (
-    "--$boundaryOne",
+   # "--$boundaryOne",
     "Content-Disposition: form-data; name=`"flood_files[]`"; filename=`"MCI.csv`"",
     "Content-Type: text/csv$LF",
     $fileEncOne,
-    "--$boundaryOne--$LF"
+    #"--$boundaryOne--$LF"
 ) -join $LF
 
 Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentTypeOne -Body $payloadOne
