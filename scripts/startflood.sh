@@ -17,7 +17,14 @@ flood_uuid=$(curl --silent -u $FLOOD_API_TOKEN: -X POST https://api.flood.io/flo
   -F "flood[name]=Build New" \
   -F "flood[tag_list]=ci,load" \
   -F "flood_files[]=@scripts/jmeter/002_MCI.jmx" \
-  -F "flood_files[]=@scripts/jmeter/MCI.csv" | /tmp/jq -r ".uuid")
+  -F "flood_files[]=@scripts/jmeter/MCI.csv" \
+  -F "flood[grids][][infrastructure]=demand" \
+  -F "flood[grids][][instance_quantity]=1" \
+  -F "flood[grids][][region]=us-west-2" \
+  -F "flood[grids][][instance_type]=m5.xlarge" \
+  -F "flood[grids][][stop_after]=15" | jq -r ".uuid" )
+  
+  echo "this looks goofd"
 
 echo "[$(date +%FT%T)+00:00] Waiting for flood https://flood.io/$flood_uuid to finish"
 while [ $(curl --silent --user $FLOOD_API_TOKEN: https://api.flood.io/floods/$flood_uuid | \
