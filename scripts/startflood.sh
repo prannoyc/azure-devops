@@ -13,8 +13,11 @@ set -e  # exit script if any command returnes a non-zero exit code.
 MY_FLOOD_TOKEN="flood_live_3363b6988a605e11fd23747a755f2a4ecd4c61a7ae"
 echo -e ">>> MY_FLOOD_TOKEN is: $MY_FLOOD_TOKEN"
 
+
 #function write to stderr if we need to report a fail
 echoerr() { echo "$@" 1>&2; }
+
+echo -e "we are here baby"
 
 FLOOD_SLEEP_SECS="10"
 FLOOD_API_FLOODS_URL="https://api.flood.io/api/floods"
@@ -30,6 +33,7 @@ else
    echo -e "\n>>> MY_FLOOD_TOKEN available. Continuing..."
 fi
 
+  echo -e "second place just before launch of flood"
   # [1.] Launch the Flood via API call
   launch=$(curl -su ${MY_FLOOD_TOKEN}: \
   -X POST ${FLOOD_API_FLOODS_URL} \
@@ -46,8 +50,9 @@ fi
   -F "flood[grids][][instance_quantity]=1" \
   -F "flood[grids][][region]=us-east-1" \
   -F "flood[grids][][instance_type]=m5.xlarge" \
-  -F "flood[grids][][stop_after]=15" | jq -r ".uuid" )
+  -F "flood[grids][][stop_after]=15")
   
+   echo -e "we are here after launch "
    echo -e "Launch: $launch"
 
    MY_FLOOD_UUID=$launch
