@@ -33,7 +33,7 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    scriptPath: 'scripts/verifystatus.ps1'
+    scriptPath: 'scripts/verifyflood.ps1'
     failOnStderr: true
     env:
     MY_FLOOD_TOKEN: $(flood_api_token)
