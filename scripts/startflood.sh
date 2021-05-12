@@ -10,7 +10,7 @@
 set -e  # exit script if any command returnes a non-zero exit code.
 # set -x  # display every command.
 
-MY_FLOOD_TOKEN="<flood_live_3363b6988a605e11fd23747a755f2a4ecd4c61a7ae>"
+MY_FLOOD_TOKEN="flood_live_3363b6988a605e11fd23747a755f2a4ecd4c61a7ae"
 echo -e ">>> MY_FLOOD_TOKEN is: $MY_FLOOD_TOKEN"
 
 #function write to stderr if we need to report a fail
