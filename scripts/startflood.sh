@@ -44,12 +44,10 @@ fi
   -F "flood_files[]=@scripts/jmeter/MCI.csv" \
   -F "flood[grids][][infrastructure]=demand" \
   -F "flood[grids][][instance_quantity]=1" \
-  -F "flood[grids][][region]=us-west-2" \
+  -F "flood[grids][][region]=us-east-1" \
   -F "flood[grids][][instance_type]=m5.xlarge" \
-  -F "flood[grids][][stop_after]=15" | jq -r ".uuid" )
+  -F "flood[grids][][stop_after]=15" 
   
-
-   #-F "flood_files[]=@specs/baseline.ts"
    echo -e "Launch: $launch"
 
    MY_FLOOD_UUID=$launch
