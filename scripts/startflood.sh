@@ -3,7 +3,7 @@ set -e
 
 command -v jq >/dev/null 2>&1 || { echo >&2 "Please install http://stedolan.github.io/jq/download/  Aborting."; exit 1; }
  
-echo ${FLOOD_API_TOKEN} 
+echo "[${FLOOD_API_TOKEN}] 
 echo "[$(date +%FT%T)+00:00] Starting grid"
 grid_uuid=`curl -X POST --silent --user ${FLOOD_API_TOKEN}: https://api.flood.io/grids \
  -F "grid[infrastructure]=demand" \
