@@ -7,7 +7,7 @@
 # This is free software; see the source for copying conditions. There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-#set -e  # exit script if any command returnes a non-zero exit code.
+set -e  # exit script if any command returnes a non-zero exit code.
 # set -x  # display every command.
 
 MY_FLOOD_TOKEN="<FLOOD API TOKEN HERE>"
