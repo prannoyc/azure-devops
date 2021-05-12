@@ -4,6 +4,8 @@ echo "[$(date +%FT%T)+00:00] Checking dependencies"
 [ -f " /tmp/jq" ] || curl --silent -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > /tmp/jq
 chmod 755 /tmp/jq
 
+FLOOD_API_TOKEN="access_token=flood_live_3363b6988a605e11fd23747a755f2a4ecd4c61a7ae"
+
 echo "[$(date +%FT%T)+00:00] Launching flood"
 flood_uuid=$(curl --silent -u $FLOOD_API_TOKEN: -X POST https://api.flood.io/floods \
   -F "flood[tool]=jmeter" \
