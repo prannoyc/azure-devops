@@ -14,16 +14,16 @@ steps:
   displayName: 'Announce we are running a Flood'
   
 
-- task: PowerShell@2
+- task: Shell@2
   inputs:
-    filePath: 'scripts/startflood.ps1'
+    filePath: 'scripts/startflood.sh'
   displayName: 'Launch Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
 
-- task: PowerShell@2
+- task: Shell@2
   inputs:
-    filePath: 'scripts/verifyflood.ps1'
+    filePath: 'scripts/verifyflood.sh'
     failOnStderr: true
   displayName: 'Flood & SLA Verification'
   env:
