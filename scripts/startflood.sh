@@ -37,7 +37,8 @@ fi
   -F "flood[threads]=5" \
   -F "flood[name]=${FLOOD_NAME}" \
   -F "flood[tag_list]=ci,shakeout" \
-  -F "flood_files[]=@wordpress-demo.ts" \
+  -F "flood_files[]=@scripts/jmeter/002_MCI.jmx" \
+  -F "flood_files[]=@scripts/jmeter/MCI.csv" \
   -F "flood[grids][][infrastructure]=demand" \
   -F "flood[grids][][instance_quantity]=1" \
   -F "flood[grids][][region]=us-west-2" \
