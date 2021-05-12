@@ -9,9 +9,6 @@
 
 set -e  # exit script if any command returnes a non-zero exit code.
 # set -x  # display every command.
-echo "[$(date +%FT%T)+00:00] Checking dependencies"
-[ -f " /tmp/jq" ] || curl --silent -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > /tmp/jq
-chmod 755 /tmp/jq
 
 MY_FLOOD_TOKEN="flood_live_3363b6988a605e11fd23747a755f2a4ecd4c61a7ae"
 echo -e ">>> MY_FLOOD_TOKEN is: $MY_FLOOD_TOKEN"
@@ -49,7 +46,7 @@ fi
   -F "flood[grids][][instance_quantity]=1" \
   -F "flood[grids][][region]=us-east-1" \
   -F "flood[grids][][instance_type]=m5.xlarge" \
-  -F "flood[grids][][stop_after]=15" | /tmp/jq -r ".uuid")
+  -F "flood[grids][][stop_after]=15" | )
   
    echo -e "Launch: $launch"
 
