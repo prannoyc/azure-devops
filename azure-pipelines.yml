@@ -23,17 +23,17 @@ steps:
  
 
 
-- task: ShellScript@2
+- task: PowerShell@2
   inputs:
-    scriptPath: 'scripts/startflood.sh'
+    scriptPath: 'scripts/startflood.ps1'
   displayName: 'Launch Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
    
 
-- task: ShellScript@2
+- task: PowerShell@2
   inputs:
-    scriptPath: 'scripts/flood-verifystatus.sh'
+    scriptPath: 'scripts/verifystatus.ps1'
     failOnStderr: true
     env:
     MY_FLOOD_TOKEN: $(flood_api_token)
