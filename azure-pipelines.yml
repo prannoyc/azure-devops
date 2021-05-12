@@ -24,7 +24,7 @@ steps:
 
 - task: ShellScript@2
   inputs:
-    scriptPath: 'scripts/startflood2.sh'
+    scriptPath: 'scripts/startflood.sh'
   displayName: 'Launch Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
