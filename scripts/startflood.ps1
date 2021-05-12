@@ -32,9 +32,6 @@ $headers = @{
 #$fileBytesOne = [System.IO.File]::ReadAllBytes($data_path);
 #[io.file]::WriteAllBytes('/data/flood/files/test.csv',$fileBytesOne);
 
-
-Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentTypeOne -Body $payloadOne
-
 #Read the script file and transplant it as part of a UTF-8 based payload
 $fileBytes = [System.IO.File]::ReadAllBytes($script_path);
 $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
