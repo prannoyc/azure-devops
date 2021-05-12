@@ -29,8 +29,8 @@ $headers = @{
 
 #Read the data file and transplant it as part of a UTF-8 based payload
 
-$fileBytesOne = [System.IO.File]::ReadAllBytes($data_path);
-[io.file]::WriteAllBytes('/data/flood/files/test.csv',$fileBytesOne);
+#$fileBytesOne = [System.IO.File]::ReadAllBytes($data_path);
+#[io.file]::WriteAllBytes('/data/flood/files/test.csv',$fileBytesOne);
 
 
 Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -ContentType $contentTypeOne -Body $payloadOne
