@@ -16,7 +16,7 @@ steps:
 
 - task: ShellScript@2
   inputs:
-    filePath: 'scripts/test.sh'
+    scriptPath: 'scripts/test.sh'
   displayName: 'Use Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
@@ -24,14 +24,14 @@ steps:
 
 - task: ShellScript@2
   inputs:
-    filePath: 'scripts/startflood2.sh'
+    scriptPath: 'scripts/startflood2.sh'
   displayName: 'Launch Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
 
 - task: ShellScript@2
   inputs:
-    filePath: 'scripts/verifyflood.sh'
+    scriptPath: 'scripts/verifyflood.sh'
     failOnStderr: true
   displayName: 'Flood & SLA Verification'
   env:
