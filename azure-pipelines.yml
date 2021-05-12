@@ -18,7 +18,6 @@ steps:
   inputs:
     filePath: 'scripts/startflood2.sh'
   displayName: 'Launch Flood'
-  failOnStderr: false
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
 
