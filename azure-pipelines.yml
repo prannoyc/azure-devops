@@ -20,6 +20,7 @@ steps:
   displayName: 'Use Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
+ 
 
 
 - task: ShellScript@2
@@ -28,7 +29,7 @@ steps:
   displayName: 'Launch Flood'
   env:
     MY_FLOOD_TOKEN: $(flood_api_token)
- 
+    LAUNCH: ${launch}
 
 - task: ShellScript@2
   inputs:
