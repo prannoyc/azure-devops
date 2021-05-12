@@ -46,7 +46,7 @@ fi
   -F "flood[grids][][instance_quantity]=1" \
   -F "flood[grids][][region]=us-east-1" \
   -F "flood[grids][][instance_type]=m5.xlarge" \
-  -F "flood[grids][][stop_after]=15" 
+  -F "flood[grids][][stop_after]=15")
   
    echo -e "Launch: $launch"
 
