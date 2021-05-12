@@ -35,22 +35,19 @@ fi
 
   echo -e "second place just before launch of flood"
   # [1.] Launch the Flood via API call
-  launch=$(curl -su ${MY_FLOOD_TOKEN}: \
+   launch=$(curl -su ${MY_FLOOD_TOKEN}: \
   -X POST ${FLOOD_API_FLOODS_URL} \
   -F "flood[tool]=jmeter" \
-  -F "flood[threads]=10" \
-  -F "flood[rampup]=30" \
-  -F "flood[duration]=120" \
-  -F "flood[privacy]=public" \
+  -F "flood[threads]=5" \
   -F "flood[name]=${FLOOD_NAME}" \
   -F "flood[tag_list]=ci,shakeout" \
   -F "flood_files[]=@scripts/jmeter/002_MCI.jmx" \
   -F "flood_files[]=@scripts/jmeter/MCI.csv" \
   -F "flood[grids][][infrastructure]=demand" \
   -F "flood[grids][][instance_quantity]=1" \
-  -F "flood[grids][][region]=us-east-1" \
+  -F "flood[grids][][region]=us-west-2" \
   -F "flood[grids][][instance_type]=m5.xlarge" \
-  -F "flood[grids][][stop_after]=15")
+  -F "flood[grids][][stop_after]=15" | jq -r ".uuid" )
   
    echo -e "we are here after launch "
    echo -e "Launch: $launch"
@@ -63,6 +60,8 @@ fi
    else
     echo -e "\n>>> MY_FLOOD_UUID was returned successfully ($MY_FLOOD_UUID). Continuing..."
    fi
+   
+   echo -e ">>> MY_FLOOD_UUID is: $MY_FLOOD_UUID"
 
    #Login=$(curl -X POST https://api.flood.io/oauth/token -F 'grant_type=password' -F 'username=$FLOOD_USERNAME' -F 'password=$FLOOD_PASSWORD') #required username and password
    #echo -e "Login: $Login"
