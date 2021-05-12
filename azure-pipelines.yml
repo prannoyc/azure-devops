@@ -26,11 +26,16 @@ steps:
   inputs:
     scriptPath: 'scripts/startflood.sh'
   displayName: 'Launch Flood'
-  
+  env:
+    MY_FLOOD_TOKEN: $(flood_api_token)
+    MY_FLOOD_UUID: $(flood_uuid)
 
 - task: ShellScript@2
   inputs:
     scriptPath: 'scripts/flood-verifystatus.sh'
     failOnStderr: true
+    env:
+    MY_FLOOD_TOKEN: $(flood_api_token)
+    MY_FLOOD_UUID: $(flood_uuid)
   displayName: 'Flood & SLA Verification'
   
