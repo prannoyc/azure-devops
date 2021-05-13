@@ -31,7 +31,7 @@ else
 fi
 
   # [1.] Launch the Flood via API call
-  launch=$(curl -u ${MY_FLOOD_TOKEN}: \
+  launch=$(curl -su ${MY_FLOOD_TOKEN}: \
   -X POST ${FLOOD_API_FLOODS_URL} \
   -F "flood[tool]=jmeter" \
   -F "flood[threads]=10" \
