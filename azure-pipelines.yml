@@ -31,7 +31,7 @@ steps:
     MY_FLOOD_TOKEN: $(flood_api_token)
    
 
-- task: PowerShell@2
+- task: ShellScript@2
   inputs:
     scriptPath: 'scripts/flood-verifystatus.sh'
     displayName: 'Flood & SLA Verification'
