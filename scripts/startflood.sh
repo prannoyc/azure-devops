@@ -93,6 +93,10 @@ fi
 
    echo "Flood Summary Report: $flood_report"  # summary report
    echo "Flood Mean Error Rate: $flood_error_rate"  # summary report
+   
+   echo
+   echo "[$(date +%FT%T)+00:00] Storing CSV results at results.csv"
+   curl --silent --user $FLOOD_API_TOKEN: https://api.flood.io/floods/$flood_uuid/result.csv > result.csv
 
    # [6.] Verify our SLA for 0 failed transactions
    if [ `echo $flood_error_rate | grep -c "0" ` -gt 0 ]
