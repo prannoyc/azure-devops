@@ -9,6 +9,8 @@
 
 set -e  # exit script if any command returnes a non-zero exit code.
 # set -x  # display every command.
+$script_path = 'scripts/jmeter/002_MCI.jmx'
+$data_path ='scripts/jmeter/MCI.csv'
 
 MY_FLOOD_TOKEN="flood_live_34692b03460e8d12544b01ddc7524b2335ef5e32ba"
 echo -e ">>> MY_FLOOD_TOKEN is: $MY_FLOOD_TOKEN"
@@ -37,8 +39,8 @@ fi
   -F "flood[threads]=10" \
   -F "flood[name]=${FLOOD_NAME}" \
   -F "flood[tag_list]=ci,shakeout" \
-  -F "flood_files[]=@scripts/jmeter/002_MCI.jmx" \
-  -F "flood_files[]=@scripts/jmeter/MCI.csv" \
+  -F "flood_files[]=@$script_path" \
+  -F "flood_files[]=@$data_path" \
   -F "flood[grids][][infrastructure]=demand" \
   -F "flood[grids][][instance_quantity]=1" \
   -F "flood[grids][][region]=us-west-2" \
