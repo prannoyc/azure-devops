@@ -85,18 +85,31 @@ fi
    echo -e "\n>>> [$(date +%FT%T)+00:00] Flood has finished ... Getting the summary report ..."
    flood_report=$(curl --silent --user $MY_FLOOD_TOKEN:  -X GET https://api.flood.io/floods/$MY_FLOOD_UUID/report | jq -r ".summary" )
    
+   echo "Flood Summary Report: $flood_report"  # summary report
+   
+   echo
+   echo "[$(date +%FT%T)+00:00] Storing CSV results at results.csv"
+   curl --silent --user $FLOOD_API_TOKEN: https://api.flood.io/floods/$flood_uuid/result.csv > result.csv
+   
+   echo "AGENT_WORKFOLDER is $AGENT_WORKFOLDER"
+   echo "AGENT_WORKFOLDER contents:"
+   ls -1 $AGENT_WORKFOLDER
+   echo "AGENT_BUILDDIRECTORY is $AGENT_BUILDDIRECTORY"
+   echo "AGENT_BUILDDIRECTORY contents:"
+   ls -1 $AGENT_BUILDDIRECTORY
+   
    # [5.] Retrieve the mean_error_rate
    echo -e "\n>>> [$(date +%FT%T)+00:00] Getting the mean error rate ..."
    flood_error_rate=$(curl --silent --user $MY_FLOOD_TOKEN:  -X GET https://api.flood.io/floods/$MY_FLOOD_UUID/report | jq -r ".mean_error_rate" )
 
    #echo -e "\n>>> [$(date +%FT%T)+00:00] Detailed results at https://api.flood.io/floods/$MY_FLOOD_UUID"
 
-   echo "Flood Summary Report: $flood_report"  # summary report
+   #echo "Flood Summary Report: $flood_report"  # summary report
    echo "Flood Mean Error Rate: $flood_error_rate"  # summary report
    
-   echo
-   echo "[$(date +%FT%T)+00:00] Storing CSV results at results.csv"
-   curl --silent --user $FLOOD_API_TOKEN: https://api.flood.io/floods/$flood_uuid/result.csv > result.csv
+   #echo
+   #echo "[$(date +%FT%T)+00:00] Storing CSV results at results.csv"
+   #curl --silent --user $FLOOD_API_TOKEN: https://api.flood.io/floods/$flood_uuid/result.csv > result.csv
 
    # [6.] Verify our SLA for 0 failed transactions
    if [ `echo $flood_error_rate | grep -c "0" ` -gt 0 ]
