@@ -27,7 +27,7 @@ echo "flood launched"
 # Wait for flood to finish
 echo "[$(date +%FT%T)+00:00] Waiting for flood $flood_uuid"
 while [ $(curl --silent --user $FLOOD_API_TOKEN: https://api.flood.io/floods/$flood_uuid | \
-  jq -r '.status == "finished"') = "false" ]; do
+  jq -r '.status == "Completed"') = "false" ]; do
   echo -n "."
   sleep 3
 done
