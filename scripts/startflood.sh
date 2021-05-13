@@ -97,6 +97,8 @@ fi
    echo "AGENT_BUILDDIRECTORY is $AGENT_BUILDDIRECTORY"
    echo "AGENT_BUILDDIRECTORY contents:"
    ls -1 $AGENT_BUILDDIRECTORY
+   pwd
+   
    
    # [5.] Retrieve the mean_error_rate
    echo -e "\n>>> [$(date +%FT%T)+00:00] Getting the mean error rate ..."
