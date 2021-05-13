@@ -124,7 +124,7 @@
           </ResponseAssertion>
           <hashTree/>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">./MCI.csv</stringProp>
+            <stringProp name="filename">MCI.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames">MCI</stringProp>
             <boolProp name="ignoreFirstLine">false</boolProp>
