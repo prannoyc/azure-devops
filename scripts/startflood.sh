@@ -9,8 +9,8 @@
 
 set -e  # exit script if any command returnes a non-zero exit code.
 # set -x  # display every command.
-script_path = "scripts/jmeter/002_MCI.jmx"
-data_path ="scripts/jmeter/MCI.csv"
+script_path="scripts/jmeter/002_MCI.jmx"
+data_path="scripts/jmeter/MCI.csv"
 
 MY_FLOOD_TOKEN="flood_live_34692b03460e8d12544b01ddc7524b2335ef5e32ba"
 echo -e ">>> MY_FLOOD_TOKEN is: $MY_FLOOD_TOKEN"
