@@ -1,36 +1,25 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- script: echo 'Lets run a Flood on Azure!'
-  displayName: 'Announce we are running a Flood'
-  
-
-- task: ShellScript@2
+jobs:
+- job: jmeter
+  pool:
+    name: Default
+    demands:
+    - 'Agent.Name -equals W10USI170354'
+    vmImage: ubuntu-latest
+  displayName: Run JMeter tests
+  steps:
+  - script: echo 'Lets run a test on Azure!' 
+  - task: ShellScript@2
   inputs:
-    scriptPath: 'scripts/test.sh'
-  displayName: 'Use Flood'
-  env:
-    MY_FLOOD_TOKEN: $(flood_api_token)
- 
+    scriptPath: 'jmeter/test.sh'
+    arguments: '$PWD CartTest.jmx $(host)'
+    workingDirectory: jmeter
+    failOnStderr: false
 
-
-- task: ShellScript@2
+- task: PublishPipelineArtifact@1
+  displayName: Publish JMeter Report
   inputs:
-    scriptPath: 'scripts/startflood.sh'
-  displayName: 'Launch Flood'
-  env:
-    MY_FLOOD_TOKEN: $(flood_api_token)
-   
-
-
-  
-  
+    scriptPath: jmeter/report
+    artifact: jmeter
