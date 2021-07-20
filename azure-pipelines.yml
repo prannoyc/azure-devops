@@ -1,6 +1,5 @@
 trigger:
 - master
-
 jobs:
 - job: jmeter
   pool:
